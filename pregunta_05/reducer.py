@@ -2,11 +2,22 @@
 # >>> Escriba el codigo del reducer a partir de este punto <<<
 #
 import sys
-
 if __name__ == '__main__':
 
-  for line in sys.stdin:
+    curkey = None
+    total = 0
 
-    lista= line.strip().replace('-', ' ').split(' ')
+    for line in sys.stdin:
 
-    sys.stdout.write("{}\t1\n".format(lista[4]))
+        key , val = line.split("\t")
+        val = int(val)
+
+        if key == curkey:
+            total += val
+        else:
+            if curkey is not None:
+                sys.stdout.write("{}\t{}\n".format(curkey, total))
+            
+            curkey = key
+            total = val
+    sys.stdout.write("{}\t{}\n".format(curkey, total))
